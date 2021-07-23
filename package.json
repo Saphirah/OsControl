@@ -1,0 +1,22 @@
+{
+  "name": "oscontrol",
+  "version": "1.0.0",
+  "description": "a program to control your os using custom commands",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Saphirah",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^13.1.7",
+    "electron-packager": "^15.3.0"
+  },
+  "dependencies": {
+    "appdata-path": "^1.0.0",
+    "electron-acrylic-window": "^0.5.7",
+    "electron-store": "^8.0.0",
+    "fs": "^0.0.1-security",
+    "readdirp": "^3.6.0"
+  }
+}

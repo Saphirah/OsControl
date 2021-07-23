@@ -1,0 +1,221 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+  </head>
+  <style>
+    @font-face {
+        font-family: 'SegoeUILight';
+        src: url('./fonts/segoeuil.ttf');
+    }
+    @font-face {
+        font-family: 'SegoeUISemiBold';
+        src: url('./fonts/seguisb.ttf');
+    }
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    body{
+      overflow: hidden;
+      margin: 20px;
+    }
+    .title{
+      color: white;
+      font-family: 'SegoeUISemiBold';
+      display: inline-block;
+      margin-left: 5px;
+      user-select: none;
+      margin-bottom: 15px;
+    }
+    .searchBar{
+      width: 100%;
+      height: 50px;
+      border-radius: 1vh;
+      font-size: 20;
+      border: 0px;
+      font-family: 'SegoeUILight';
+      padding-left: 15px;
+      margin-bottom: 10px;
+      float:left;
+    }
+    .searchBar:focus{
+      outline: none
+    }
+    .outputFields{
+      width: calc(100% - 15px);
+      height: 30px;
+      border-radius: 1vh;
+      font-size: 18;
+      border: 0px;
+      font-family: 'SegoeUILight';
+      background-color: white;
+      color: black;
+      margin-top: 5px;
+      padding-left: 15px;
+      padding-top: 5px;
+    }
+    button{
+      padding: 0;
+      margin: 0;
+      border: 0px;
+      width: calc(50% - 2px);
+      height: 50px;
+      background-color: white;
+      font-family: 'SegoeUISemiBold';
+      border-radius: 1vh;
+      box-shadow: 0px 0px 0px black;
+      transition: all 0.25s;
+      cursor: pointer;
+      float:left;
+    }
+    button:hover{
+      transform: translateY(-3px);
+      box-shadow: 0px 0px 5px black;
+    }
+
+    .twoButtonsMain{
+      overflow: visible;
+      padding: 0;
+      margin: 0;
+      border: 0px;
+      width: 54px;
+      height: 50px;
+      background-color: white;
+      font-family: 'SegoeUISemiBold';
+      border-radius: 1vh;
+      box-shadow: 0px 0px 0px black;
+      transition: all 0.25s;
+      cursor: pointer;
+      float:left;
+    }
+
+    .twoButtonsMain > .twoButtonsChild{
+      position: absolute;
+      width: 70px;
+      height: 0px;
+      border-radius: 1vw;
+      transition: all 0.2s;
+      background-color: white;
+      box-shadow: 0px 0px 0px 0px;
+    }
+
+    .twoButtonsMain > .twoButtonsChild1{
+      transform:translate(-10px, 0px);
+    }
+
+    .twoButtonsMain > .twoButtonsChild2{
+      transform:translate(-10px, 50px);
+    }
+
+    .twoButtonsMain:hover > .twoButtonsChild1{
+      transform:translate(-10px, -30px);
+      height: 50px;
+      box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.2);
+    }
+    .twoButtonsMain:hover > .twoButtonsChild2{
+      transform:translate(-10px, 30px);
+      height: 50px;
+      box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.2);
+    }
+    .twoButtonsMain > .twoButtonsChild > img{
+      width: 40%; 
+      height:60%;
+    }
+  </style>
+  <body>
+    <h1 class="title" style="font-family: 'SegoeUILight';">Control</h1><h5 class="title">1.0</h5>
+    <hr noshade style="margin-bottom: 30px; border-color: white;">
+    <h5 class="title">Command Name</h5>
+    <input type="text" class="searchBar" id="commandName" autofocus>
+    <h5 class="title" style="width: calc(100% - 5px);">FilePath</h5>
+    <input type="text" class="searchBar" id="filePath" style="width: calc(100% - 58px); margin-right: 4px;">
+    <div class="twoButtonsMain">
+      <button onclick="chooseFile()" class="twoButtonsChild twoButtonsChild1">
+        <img src="./images/file.png">
+      </button>
+      <button onclick="chooseFolder()" class="twoButtonsChild twoButtonsChild2">
+        <img src="./images/folder.png">
+      </button>
+      <img src="./images/files.png" style="width: 60%; height:60%; display: block; margin: auto; padding-top: 9px;">
+    </div>
+    <h5 class="title">Additional Parameters</h5>
+    <input type="text" class="searchBar" id="additionalParameters">
+    
+
+    <script>
+      const commandName = document.getElementById("commandName");
+      const filePath = document.getElementById("filePath");
+      const additionalParameters = document.getElementById("additionalParameters");
+
+      const Store = require('electron-store');
+      const remote = require('electron').remote;
+      const electronFs = remote.require('fs');
+      const win = remote.getCurrentWindow();
+      const dialog = remote.dialog;
+      const store = new Store();
+
+      win.setSize(500, 500);
+      
+      var data = store.get('Commands');
+
+      const filePicker = document.getElementById("filePicker");
+
+      filePath.addEventListener("change", filePathChanged());
+
+      function chooseFile(){
+        filePath.value = dialog.showOpenDialogSync({properties:['openFile']});
+        filePathChanged();
+      }
+
+      function chooseFolder(){
+        filePath.value = dialog.showOpenDialogSync({properties:['openDirectory']}) + "\\";
+        filePathChanged();
+      }
+
+      function filePathChanged(){
+        var path = fs.lstatSync(filePath.value);
+        if(path.isDirectory()){
+          
+        }
+        else if(path.isFile()){
+
+        }
+      }
+
+      function saveEntry(){
+        //Forgot Name
+        if(commandName.value.length === 0){
+          commandName.style.border = "solid 2px red";
+          return
+        }
+
+        //Forgot filePath
+        if(filePath.value.length === 0){
+          filePath.style.border = "solid 2px red";
+          return
+        }
+
+        //Store command
+        data = store.get('Commands');
+        data.push({
+          "Name": commandName.value, 
+          "Command": filePath.value,
+          "Parameter": additionalParameters.value,
+          "Used": 0
+        });
+        store.set("Commands", data);
+        goToIndex();
+      }
+
+      //Return to main page
+      function goToIndex(){
+        window.location.href = "index.html";
+      }
+    </script>
+
+    <button onclick="saveEntry()" style="margin-right: 4px;">Save</button>
+    <button onclick="goToIndex()">Quit</button>
+    
+  </body>
+</html>
