@@ -58,7 +58,7 @@ function reimportPrograms(){
       if(commands.filter(word => word["Name"] == name).length == 0){
         commands.push({
           "Name": name,
-          "Command": entry.fullPath,
+          "Command": '"' + entry.fullPath + '"',
           "Parameter": "",
           "Used": 0
         });
@@ -76,7 +76,7 @@ function reimportPrograms(){
           if(commands.filter(word => word["Name"] == name).length == 0){
             commands.push({
               "Name": name,
-              "Command": entry.fullPath,
+              "Command": '"' + entry.fullPath + '"',
               "Parameter": "",
               "Used": 0
             });
