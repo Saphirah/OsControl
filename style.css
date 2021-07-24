@@ -1,0 +1,161 @@
+@font-face {
+    font-family: 'SegoeUILight';
+    src: url('./fonts/segoeuil.ttf');
+}
+@font-face {
+    font-family: 'SegoeUISemiBold';
+    src: url('./fonts/seguisb.ttf');
+}
+*{
+  margin: 0;
+  padding: 0;
+  display: block;
+  float: left;
+}
+title{
+  display:none;
+}
+html{
+  float: none;
+  margin: 20px;
+}
+body{
+  overflow: hidden;
+  width: 100%;
+  background: none;
+  float: none;
+}
+img{
+  float: none;
+  margin: auto;
+}
+.title{
+  color: white;
+  font-family: 'SegoeUISemiBold';
+  display: inline-block;
+  margin-left: 5px;
+  user-select: none;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.halfTitle{
+  width: auto;
+}
+
+.searchBar{
+  width: 100%;
+  height: 50px;
+  border-radius: 1vh;
+  font-size: 20;
+  border: 0px;
+  font-family: 'SegoeUILight';
+  padding-left: 15px;
+  margin-bottom: 10px;
+  float:left;
+}
+.searchBar:focus{
+  outline: none
+}
+.outputFields{
+  width: calc(100% - 15px);
+  height: 30px;
+  border-radius: 1vh;
+  font-size: 18;
+  border: 0px;
+  font-family: 'SegoeUILight';
+  background-color: white;
+  color: black;
+  margin-top: 5px;
+  padding-left: 15px;
+  padding-top: 5px;
+}
+button{
+  padding: 0;
+  margin: 0;
+  border: 0px;
+  width: calc(50% - 2px);
+  height: 50px;
+  background-color: white;
+  font-family: 'SegoeUISemiBold';
+  border-radius: 1vh;
+  box-shadow: 0px 0px 0px black;
+  transition: all 0.25s;
+  cursor: pointer;
+  float:left;
+}
+button:hover{
+  transform: translateY(-3px);
+  box-shadow: 0px 0px 5px black;
+}
+
+.addonButton{
+  height: 35px;
+  width: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-right: 4px;
+}
+
+.addonBackground{
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 1vh;
+}
+
+.twoButtonsMain{
+  overflow: visible;
+  padding: 0;
+  margin: 0;
+  border: 0px;
+  width: 54px;
+  height: 50px;
+  background-color: white;
+  font-family: 'SegoeUISemiBold';
+  border-radius: 1vh;
+  box-shadow: 0px 0px 0px black;
+  transition: all 0.25s;
+  cursor: pointer;
+  float:left;
+}
+
+.twoButtonsMain > .twoButtonsChild{
+  position: absolute;
+  width: 70px;
+  height: 0px;
+  border-radius: 1vw;
+  transition: all 0.2s;
+  background-color: white;
+  box-shadow: 0px 0px 0px 0px;
+}
+
+.twoButtonsMain > .twoButtonsChild1{
+  transform:translate(-10px, 0px);
+}
+
+.twoButtonsMain > .twoButtonsChild2{
+  transform:translate(-10px, 50px);
+}
+
+.twoButtonsMain:hover > .twoButtonsChild1{
+  transform:translate(-10px, -30px);
+  height: 50px;
+  box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.2);
+}
+.twoButtonsMain:hover > .twoButtonsChild2{
+  transform:translate(-10px, 30px);
+  height: 50px;
+  box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.2);
+}
+.twoButtonsMain > .twoButtonsChild > img{
+  width: 40%; 
+  height:60%;
+}
+
+#outputFieldContainer{
+  float: none;
+}
+
+#searchBar{
+  float: none;
+}
