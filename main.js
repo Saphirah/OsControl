@@ -116,7 +116,7 @@ app.whenReady().then(() => {
         frame: false,
         transparent: true,
         show: false,
-        resizable: false,
+        resizable: true,
         minimizable: false,
         maximizable: false,
         fullscreenable: false,
@@ -167,11 +167,11 @@ app.whenReady().then(() => {
     })
   });
 
-  ipcMain.on('close-me', (evt, arg) => {
+  ipcMain.on('Quit', (evt, arg) => {
     app.quitting = true;
     app.quit()
   })
 
-  ipcMain.on('reloadPrograms', (evt, arg) => {
+  ipcMain.on('ReloadPrograms', (evt, arg) => {
     reimportPrograms();
   })
