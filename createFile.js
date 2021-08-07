@@ -1,24 +1,25 @@
-const commandName = document.getElementById("commandName");
-const filePath = document.getElementById("filePath");
-const additionalParameters = document.getElementById("additionalParameters");
-const componentList = document.getElementById("additionalContent");
+var commandName = document.getElementById("commandName");
+var filePath = document.getElementById("filePath");
+var additionalParameters = document.getElementById("additionalParameters");
+var componentList = document.getElementById("additionalContent");
 
-const Store = require('electron-store');
-const remote = require('electron').remote;
-const fs = remote.require('fs');
-const win = remote.getCurrentWindow();
-const dialog = remote.dialog;
-const store = new Store();
+var Store = require('electron-store');
+var remote = require('electron').remote;
+var fs = remote.require('fs');
+var win = remote.getCurrentWindow();
+var dialog = remote.dialog;
+var store = new Store();
 
-const onChooseFile = new Event('onChooseFile', {bubbles: true});
-const onChooseFolder = new Event('onChooseFolder', {bubbles: true});
+var onChooseFile = new Event('onChooseFile', {bubbles: true});
+var onChooseFolder = new Event('onChooseFolder', {bubbles: true});
+var onChangeCommand = new Event('onChangeCommand', {bubbles: true});
 
 win.setMinimumSize(500, 500);
 win.setSize(500, 500);
 
 var data = store.get('Commands');
 
-const filePicker = document.getElementById("filePicker");
+var filePicker = document.getElementById("filePicker");
 
 filePath.addEventListener("change", filePathChanged());
 
@@ -47,6 +48,7 @@ function filePathChanged(){
     }catch(e){
         console.log("File does not exist");
     }
+    filePath.dispatchEvent(onChangeCommand)
 }
 
 function saveEntry(){

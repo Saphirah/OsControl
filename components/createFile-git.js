@@ -1,5 +1,5 @@
 var createFileGitShown = false;
-var createFileGitContent = ""
+var createFileGitContent = "";
 
 var createFileGitContainer = document.createElement("div");
 componentList.appendChild(createFileGitContainer);
@@ -33,17 +33,39 @@ document.addEventListener("onChooseFolder", function(){
     }
 });
 
+function createFileGitCheckWindow(){
+    if(fs.existsSync(filePath.value + "/.git")){
+        //Enlarge Window
+        if(!createFileGitShown){
+            createFileGitShown = true;
+            var [width, height] = win.getSize();
+            win.setMinimumSize(width, height+50);
+            win.setSize(width, height+50);
+            createFileGitContainer.innerHTML = createFileGitContent;
+        }
+    } else {
+        //Decrease Window
+        if(createFileGitShown){
+            createFileGitShown = false;
+            var [width, height] = win.getSize();
+            win.setMinimumSize(width, height-50);
+            win.setSize(width, height-50);
+            createFileGitContainer.innerHTML = "";
+        }
+    }
+}
+
 function createFileGitPull(){
-    filePath.value = "git -C \"" + filePath.value + "\" pull"
-    saveEntry()
+    filePath.value = "git -C \"" + filePath.value + "\" pull";
+    createFileGitCheckWindow();
 }
 
 function createFileGitCommit(){
-    filePath.value = "git -C \"" + filePath.value + "\" commit -am \"Automated Commit\""
-    saveEntry()
+    filePath.value = "git -C \"" + filePath.value + "\" commit -am \"Automated Commit\"";
+    createFileGitCheckWindow();
 }
 
 function createFileGitPush(){
-    filePath.value = "git -C \"" + filePath.value + "\" push"
-    saveEntry()
+    filePath.value = "git -C \"" + filePath.value + "\" push";
+    createFileGitCheckWindow();
 }
